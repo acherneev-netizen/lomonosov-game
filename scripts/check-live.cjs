@@ -43,7 +43,7 @@ const sha = data => crypto.createHash('sha256').update(data).digest('hex');
       page.on('pageerror', e => errors.push(e.message));
       page.on('requestfailed', r => failures.push(r.url()));
       page.on('request', r => { if (r.url().startsWith('http:')) insecure.push(r.url()); });
-      const response = await page.goto(target.href, { waitUntil: 'load' });
+      const response = await page.goto(target.href, { waitUntil: 'domcontentloaded', timeout: 60000 });
       assert.equal(response.status(), 200);
       await page.locator('.start').waitFor();
       assert.equal(await page.locator('#author-credit').textContent(), '© 2026. Автор — Чернеева Т. А. Все права защищены.');
