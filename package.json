@@ -6,6 +6,7 @@
   "scripts": {
     "verify": "python scripts/verify.py",
     "test": "node tests/browser.cjs",
+    "check:live": "node scripts/check-live.cjs",
     "stage": "python scripts/verify.py --stage"
   },
   "devDependencies": {

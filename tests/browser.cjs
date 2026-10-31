@@ -215,6 +215,17 @@ async function responsive(browser, browserName, base) {
   }
   const page = await browser.newPage(); await page.goto(base); await page.locator('.start').waitFor(); await page.close();
   check(browserName + ': hosting at domain root and subdirectory');
+  const noAudio = await browser.newContext();
+  await noAudio.addInitScript(() => {
+    const C = window.AudioContext || window.webkitAudioContext;
+    if (C) C.prototype.resume = () => new Promise(() => {});
+  });
+  const fallback = await noAudio.newPage();
+  await fallback.goto(base + 'lomonosov-game/');
+  await fallback.locator('.start').click();
+  await fallback.getByRole('heading', { name: 'Карта открытий', exact: true }).waitFor({ timeout: 6000 });
+  await noAudio.close();
+  check(browserName + ': game starts even when audio resume never resolves');
 }
 
 (async () => {
