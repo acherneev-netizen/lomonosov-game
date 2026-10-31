@@ -1,0 +1,4 @@
+# Preserve the exact bytes of the original notices and deployable HTML.
+*.html -text
+COPYRIGHT.txt -text
+THIRD_PARTY_NOTICES.txt -text

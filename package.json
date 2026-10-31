@@ -1,0 +1,14 @@
+{
+  "name": "lomonosov-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Проверки оригинальной образовательной игры Чернеевой Т. А.",
+  "scripts": {
+    "verify": "python scripts/verify.py",
+    "test": "node tests/browser.cjs",
+    "stage": "python scripts/verify.py --stage"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
